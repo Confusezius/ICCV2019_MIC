@@ -308,10 +308,7 @@ def eval_metrics_query_and_gallery_dataset(model, query_dataloader, gallery_data
             gallery_target_labels.extend(target.numpy().tolist())
             out = model(input_img.to(device))
             if isinstance(out, dict):
-                if len(weights)==2:
-                    out = torch.nn.functional.normalize(torch.cat([weights[0]*out['Class'],weights[1]*out['Shared']], dim=-1), dim=-1)
-                else:
-                    out = out[evaltype] if spliteval else torch.cat([out['Class'],out['Shared']], dim=-1)
+                out = out[evaltype]
             gallery_feature_coll.extend(out.cpu().detach().numpy().tolist())
 
 
