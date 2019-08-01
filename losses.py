@@ -356,7 +356,7 @@ class MarginLoss(torch.nn.Module):
         loss = torch.sum(pos_loss+neg_loss) if pair_count==0. else torch.sum(pos_loss+neg_loss)/pair_count
 
         #(Optional) Add regularization penalty on betas.
-        if self.nu: loss = loss + beta_regularisation_loss.type(torch.cuda.FloatTensor)
+        # if self.nu: loss = loss + beta_regularisation_loss.type(torch.cuda.FloatTensor)
 
         return loss
 
@@ -465,7 +465,7 @@ class AdvLoss(torch.nn.Module):
 
     def forward(self, class_features, aux_features):
         #Apply gradient reversal on input embeddings.
-        features = [grad_reverse(class_features), grad_reverse(aux_features)]
+        features = [torch.nn.functional.normalize(grad_reverse(class_features),dim=-1), torch.nn.functional.normalize(grad_reverse(aux_features),dim=-1)]
         #Project one embedding to the space of the other (with normalization), then compute the correlation.
         sim_loss = -1.*torch.mean(torch.mean((features[0]*torch.nn.functional.normalize(self.regressor(features[1]),dim=-1))**2,dim=-1))
         return sim_loss
