@@ -19,3 +19,4 @@ python MIC_ICCV19_Main.py --gpu 0 --seed 1 --savename result_run_vhid     --data
 
 
 python main.py --gpu 0 --bs 60 --seed 1 --source_path /media/karsten_dl/QS/Data/Dropbox/Projects/Datasets --savename result_run_cub200   --dataset cub200 --shared_num_classes 30  --cluster_update_freq 3 --adv_weights 2500 --task_p 1 0.8 --tau 52 --n_epochs 110 --random_cluster_pick_p 0.2
+python main.py --gpu 0 --bs 60 --seed 1 --source_path /media/karsten_dl/QS/Data/Dropbox/Projects/Datasets --savename result_run_vhid     --dataset vehicle_id --shared_num_classes 30  --cluster_update_freq 3 --adv_weights 2500 --task_p 1 0.8 --tau 52 --n_epochs 110 --random_cluster_pick_p 0.2

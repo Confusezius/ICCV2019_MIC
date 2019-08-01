@@ -184,7 +184,7 @@ def evaluate_multiple_datasets(LOG, dataloaders, model, opt, evaltype='Class', s
             print('Working on Set {}/{}'.format(i+1, len(dataloaders)))
             image_paths = np.array(dataloader.dataset.image_list)
             #Compute Metrics for specific testset.
-            F1, NMI, recall_at_ks, feature_matrix_all = aux.eval_metrics_one_dataset(model, dataloader, device=opt.device, k_vals=opt.k_vals, opt=opt)
+            F1, NMI, recall_at_ks, feature_matrix_all = aux.eval_metrics_one_dataset(model, dataloader, device=opt.device, k_vals = opt.k_vals, evaltype=evaltype)
             #Generate printable summary string.
             result_str = ', '.join('@{0}: {1:.4f}'.format(k,rec) for k,rec in zip(opt.k_vals, recall_at_ks))
             result_str = 'SET {0}: Epoch (Test) {1}: NMI [{2:.4f}] | F1 {3:.4f}| Recall [{4}]'.format(i+1, epoch, NMI, F1, result_str)
