@@ -39,7 +39,9 @@ simply run the sample setups given in `Result_Runs.sh`. These give the values re
 ---
 
 ### Specifics
-The main script is `main.py`. Running it with default flags will provide a Metric Learning Run with Interclass Mining on CUB200-2011 using Resnet50, Marginloss and Distance-weighted Sampling. For all tweakable parameters and their purpose, please refer to the help-strings in the `main.py`-ArgumentParser. Most should be fairly self-explanatory.
+The main script is `main.py`. Running it with default flags will provide a Metric Learning Run with Interclass Mining on CUB200-2011 using Resnet50, Marginloss and Distance-weighted Sampling. For all tweakable parameters and their purpose, please refer to the help-strings in the `main.py`-ArgumentParser. Most should be fairly self-explanatory.  
+__NOTE:__
+ProxyNCA for __Online Products__, __PKU Vehicle ID__ and __In-Shop Clothes__: Due to the high number of classes, the number of proxies required is too high for useful training (>10000 proxies).
 
 
 ---
@@ -186,16 +188,3 @@ __PKU VEHICLE ID__
    NMI  |  F1  | Small R@1  | Small R@5 | Big R@1 | Big R@5   
 --------|------|----- |----- |----- |-----
  68.2   | 38.7 | 63.4 | 74.9 | 77.7 | 77.7
-
-
-__NOTE:__
-ProxyNCA for __Online Products__, __PKU Vehicle ID__ and __In-Shop Clothes__: Due to the high number of classes, the number of proxies required is too high for useful training (>10000 proxies).
-
----
-
-## ToDO:
-- [x] Fix Version in `requirements.txt`  
-- [x] Add Results for Implementations
-- [x] Finalize Comments  
-- [ ] Add Inception-BN  
-- [ ] Add Lifted Structure Loss

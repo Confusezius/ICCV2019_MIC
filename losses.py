@@ -50,7 +50,7 @@ def loss_select(loss, opt, to_optim, param_idx):
         criterion    = TripletLoss(**loss_params)
     elif loss=='marginloss':
         loss_params  = {'margin':opt.margin[i], 'nu': opt.nu[i],
-                        'beta':opt.beta[i], 'n_classes':opt.num_classes[i],
+                        'beta':opt.beta[i], 'n_classes':opt.all_num_classes[i],
                         'sampling_method':opt.sampling[i]}
         criterion    = MarginLoss(**loss_params)
         to_optim    += [{'params':criterion.parameters(), 'lr':opt.beta_lr[i], 'weight_decay':0}]
@@ -60,7 +60,7 @@ def loss_select(loss, opt, to_optim, param_idx):
         to_optim    += [{'params':criterion.parameters(), 'lr':opt.proxy_lr[i]}]
     elif loss=='adversarial':
         loss_params  = {'class_dim':opt.embed_dim_target, 'aux_dim':opt.embed_dim_source,
-                        'proj_dim':opt.advnet_dim}
+                        'proj_dim': opt.adv_dim}
         criterion    = AdvLoss(**loss_params)
         to_optim    += [{'params':criterion.parameters(), 'lr':opt.lr, 'weight_decay':1e-6}]
     else:
@@ -207,7 +207,7 @@ class Sampler():
         return res.clamp(min = eps).sqrt()
 
 
-    def inverse_sphere_distances(batch, dist, labels, anchor_label):
+    def inverse_sphere_distances(self, batch, dist, labels, anchor_label):
         """
         Function to utilise the distances of batch samples to compute their
         probability of occurence, and using the inverse to sample actual negatives to the resp. anchor.

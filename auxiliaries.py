@@ -649,6 +649,8 @@ class LOGGER():
         if start_new: set_logging(opt)
 
         ### Set INFO-PLOTS
+        self.name = name
+        self.save_path = opt.save_path
         if self.prop.dataset != 'vehicle_id':
             self.info_plot = InfoPlotter(opt.save_path+'/InfoPlot_{}.svg'.format(name))
         else:
@@ -722,7 +724,23 @@ class LOGGER():
                 v_legend_handles = [key for key in self.progress_saver['val'].keys() if key not in ['Time', 'Epochs'] and 'Set {}'.format(i) in key]
                 self.info_plot['Set {}'.format(i)].make_plot(t_epochs, v_epochs, t_loss_list, v_metric_list, t_legend_handles, v_legend_handles, appendix='set_{}'.format(i))
 
+    def write_summary(self):
+        with open(self.save_path+'/Curr_Summary_{}.txt'.format(self.name),'w') as f:
+            summary_str = ''
+            for subcat,subitem in self.progress_saver.items():
+                summary_str += '----- '+subcat+':\n'
+                for el,im in subitem.items():
+                    if 'time' in el.lower():
+                        summary_str += 'Time Elapsed: {0:.2f}s'.format(np.sum(im))
+                    elif 'epoch' in el.lower():
+                        summary_str += 'Epochs Elapsed: {0:.0f}'.format(np.max(im))
+                    elif 'loss' in el.lower():
+                        summary_str += 'Min. {0}: {1:.3f}'.format(el,np.min(im))
+                    else:
+                        summary_str += 'Max. {0}: {1:.3f}'.format(el,np.max(im))
+                    summary_str += '\n'
 
+            f.write(summary_str)
 
 
 """================================================================================================="""

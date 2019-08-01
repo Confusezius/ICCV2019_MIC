@@ -244,15 +244,7 @@ metrics_to_log = aux.metrics_to_examine(opt.dataset, opt.k_vals)
 #This includes network weights as well.
 LOG = {}
 LOG['Class'] = aux.LOGGER(opt, metrics_to_log, name='Class', start_new=True)
-#If graphviz is installed on the system, a computational graph of the underlying
-#network will be made as well.
-try:
-    aux.save_graph(opt, model)
-except:
-    print('Cannot generate graph!')
-
 # For Logger-Settings, please refer directly to the LOGGER class in auxiliaries.py
-LOG['Class']  = aux.LOGGER(opt, info_plot=True, csv_loggers=['train', 'val'], progress_saver=True, name='Class', start_new=True)
 #If graphviz is installed on the system, a computational graph of the underlying
 #network can be made as well.
 try:
@@ -339,8 +331,8 @@ def train_one_epoch(dataloaders, model, optimizer, opt, epoch, Criterions):
                 loss_collect.append(loss.item())
 
     #### MORE Data Logging
-    if not len(collects): loss_collect = [0]
-    LOG['Class'].log('train', LOG.metrics_to_log['train'], [epoch, np.round(time.time()-start,4), np.mean(loss_collect)])
+    if not len(loss_collect): loss_collect = [0]
+    LOG['Class'].log('train', LOG['Class'].metrics_to_log['train'], [epoch, np.round(time.time()-start,4), np.mean(loss_collect)])
 
 
 
@@ -380,11 +372,11 @@ for epoch in range(opt.n_epochs):
 
     ### Update Cluster Information
     if opt.cluster_update_counter==opt.cluster_update_freq:
-        new_shared_labels = aux.deepcluster(opt, dataloaders['Shared']['label_generator'], model, num_cluster=opt.all_num_classes['Shared'])
+        new_shared_labels = aux.deepcluster(opt, dataloaders['Shared']['label_generator'], model, num_cluster=opt.all_num_classes[1])
         dataloaders['Shared']['training'].dataset.update_labels(new_shared_labels)
-        opt.cluster_update_counter=0
+        opt.cluster_update_counter = 0
     else:
-        opt.cluster_update_counter+=1
+        opt.cluster_update_counter+= 1
 
 
     ### Learning Rate Scheduling Step
@@ -392,3 +384,7 @@ for epoch in range(opt.n_epochs):
         scheduler.step()
 
     print('\n-----\n')
+
+
+    ### Write Training Summary
+    LOG['Class'].write_summary()

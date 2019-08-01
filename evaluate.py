@@ -82,7 +82,7 @@ def evaluate_one_dataset(LOG, dataloader, model, opt, evaltype='Class', save=Tru
 
     with torch.no_grad():
         #Compute Metrics
-        F1, NMI, recall_at_ks, feature_matrix_all = aux.eval_metrics_one_dataset(model, dataloader, device=opt.device, spliteval=spliteval, k_vals=opt.k_vals, opt=opt, evaltype=evaltype, weights=weights)
+        F1, NMI, recall_at_ks, feature_matrix_all = aux.eval_metrics_one_dataset(model, dataloader, device=opt.device, k_vals=opt.k_vals, evaltype=evaltype)
         #Make printable summary string.
         result_str = ', '.join('@{0}: {1:.4f}'.format(k,rec) for k,rec in zip(opt.k_vals, recall_at_ks))
         result_str = 'Epoch (Test) {0}: NMI [{1:.4f}] | F1 [{2:.4f}] | Recall [{3}]'.format(epoch, NMI, F1, result_str)
@@ -94,7 +94,7 @@ def evaluate_one_dataset(LOG, dataloader, model, opt, evaltype='Class', save=Tru
                     aux.recover_closest_one_dataset(feature_matrix_all, image_paths, LOG[evaltype].prop.save_path+'/sample_recoveries.png')
 
             #Update logs.
-            LOG.log('val', LOG.metrics_to_log['val'], [epoch, np.round(time.time()-start), NMI, F1]+recall_at_ks)
+            LOG[evaltype].log('val', LOG[evaltype].metrics_to_log['val'], [epoch, np.round(time.time()-start), NMI, F1]+recall_at_ks)
 
     prefix = '{}: '.format(evaltype.upper())
     print(prefix+' '+result_str)
@@ -130,7 +130,7 @@ def evaluate_query_and_gallery_dataset(LOG, query_dataloader, gallery_dataloader
 
     with torch.no_grad():
         #Compute Metrics.
-        F1, NMI, recall_at_ks, query_feature_matrix_all, gallery_feature_matrix_all = aux.eval_metrics_query_and_gallery_dataset(model, query_dataloader, gallery_dataloader, device=opt.device, spliteval=spliteval, k_vals = opt.k_vals, opt=opt, evaltype=evaltype, weights=weights)
+        F1, NMI, recall_at_ks, query_feature_matrix_all, gallery_feature_matrix_all = aux.eval_metrics_query_and_gallery_dataset(model, query_dataloader, gallery_dataloader, device=opt.device, k_vals = opt.k_vals, evaltype=evaltype)
         #Generate printable summary string.
         result_str = ', '.join('@{0}: {1:.4f}'.format(k,rec) for k,rec in zip(opt.k_vals, recall_at_ks))
         result_str = 'Epoch (Test) {0}: NMI [{1:.4f}] | F1 [{2:.4f}] | Recall [{3}]'.format(epoch, NMI, F1, result_str)
@@ -142,7 +142,7 @@ def evaluate_query_and_gallery_dataset(LOG, query_dataloader, gallery_dataloader
                     aux.recover_closest_inshop(query_feature_matrix_all, gallery_feature_matrix_all, query_image_paths, gallery_image_paths, LOG[evaltype].prop.save_path+'/sample_recoveries.png')
 
             #Update logs.
-            LOG.log('val', LOG.metrics_to_log['val'], [epoch, np.round(time.time()-start), NMI, F1]+recall_at_ks)
+            LOG[evaltype].log('val', LOG[evaltype].metrics_to_log['val'], [epoch, np.round(time.time()-start), NMI, F1]+recall_at_ks)
 
     prefix = '{}: '.format(evaltype.upper())
     print(prefix+' '+result_str)
@@ -201,7 +201,7 @@ def evaluate_multiple_datasets(LOG, dataloaders, model, opt, evaltype='Class', s
 
     csv_data.insert(0, np.round(time.time()-start))
     #Update logs.
-    LOG.log('val', LOG[evaltype].metrics_to_log['val'], csv_data)
+    LOG[evaltype].log('val', LOG[evaltype].metrics_to_log['val'], csv_data)
 
 
     if give_return:
