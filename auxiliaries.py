@@ -1,6 +1,6 @@
 # Copyright (C) 2019 Karsten Roth and Biagio Brattoli
 #
-# This file is part of DeepMetricLearning_with_InterClassCharacteristics
+# This file is part of MIC-ICCV2019.
 #
 # DeepMetricLearning_with_InterClassCharacteristics is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

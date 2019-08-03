@@ -1,6 +1,6 @@
 # Copyright (C) 2019 Karsten Roth and Biagio Brattoli
 #
-# This file is part of MIC_ICCV_2019
+# This file is part of MIC-ICCV2019.
 #
 # MIC_ICCV_2019 is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -237,8 +237,6 @@ metrics_to_log = aux.metrics_to_examine(opt.dataset, opt.k_vals)
 # example output: {'train': ['Epochs', 'Time', 'Train Loss', 'Time'],
 #                  'val': ['Epochs','Time','NMI','F1', 'Recall @ 1','Recall @ 2','Recall @ 4','Recall @ 8']}
 
-
-
 #Using the provided metrics of interest, we generate a LOGGER instance.
 #Note that 'start_new' denotes that a new folder should be made in which everything will be stored.
 #This includes network weights as well.
@@ -255,7 +253,6 @@ try:
 except:
     # Will be thrown if graphviz is not installed (correctly).
     print('Cannot generate graph!')
-
 
 
 """============================================================================"""
@@ -333,7 +330,6 @@ def train_one_epoch(dataloaders, model, optimizer, opt, epoch, Criterions):
     #### MORE Data Logging
     if not len(loss_collect): loss_collect = [0]
     LOG['Class'].log('train', LOG['Class'].metrics_to_log['train'], [epoch, np.round(time.time()-start,4), np.mean(loss_collect)])
-
 
 
 
