@@ -1,13 +1,13 @@
 # Copyright (C) 2019 Karsten Roth and Biagio Brattoli
 #
-# This file is part of MIC-ICCV2019.
+# This file is part of metric-learning-mining-interclass-characteristics.
 #
-# DeepMetricLearning_with_InterClassCharacteristics is free software: you can redistribute it and/or modify
+# metric-learning-mining-interclass-characteristics is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# DeepMetricLearning_with_InterClassCharacteristics is distributed in the hope that it will be useful,
+# metric-learning-mining-interclass-characteristics is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.

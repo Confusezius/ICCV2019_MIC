@@ -1,4 +1,4 @@
-# MIC: Mining Interclass Characteristics to improve Deep Metric Learning
+# MIC: Mining Interclass Characteristics for Improved Deep Metric Learning
 ---
 #### ___Authors___:
 * Karsten Roth (karsten.rh1@gmail.com)
