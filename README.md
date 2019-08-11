@@ -6,9 +6,9 @@
 * Björn Ommer ()
 
 ---
-This repository contains the code to run the pipeline proposed in our ICCV 2019 paper _Mining Interclass Characteristics for Improved Deep Metric Learning_ (arxiv link).
+This repository contains the code to run the pipeline proposed in our ICCV 2019 paper _Mining Interclass Characteristics for Improved Deep Metric Learning_ (arxiv link). The results using this pipeline for ProxyNCA and Triplet with Semihard Sampling are better than noted in the paper due to an improved implementation of the baseline methods.
 
-**Note:** Baseline implementations can be found at https://github.com/Confusezius/Deep-Metric-Learning-Baselines
+**Note:** Baseline implementations can be found at https://github.com/Confusezius/Deep-Metric-Learning-Baselines.
 
 ---
 ### Requirements
