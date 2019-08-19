@@ -68,7 +68,7 @@ parser.add_argument('--k_vals',        nargs='+', default=[], type=int,
 ### General Training Parameters
 parser.add_argument('--n_epochs',   default=130,         type=int,
                     help='Number of training epochs.')
-parser.add_argument('--kernels',    default=8,           type=int,
+parser.add_argument('--kernels',    default=-1,           type=int,
                     help='Number of workers for pytorch dataloader.')
 parser.add_argument('--seed',       default=1,           type=int,
                     help='Random seed for reproducibility.')
@@ -130,7 +130,7 @@ parser.add_argument('--random_cluster_pick_p',   default=0.2, type=float,
                     help='Probability of assigning a random image to a cluster label to reduce overfitting to aux. task.')
 
 ### Setup Parameters
-parser.add_argument('--gpu',               default=0,           type=int,
+parser.add_argument('--gpu',               default=-1,           type=int,
                     help='GPU-ID for GPU to use.')
 parser.add_argument('--savename',          default='',          type=str,
                     help='Specific save folder name. Will override default name based on start time.')
@@ -174,11 +174,15 @@ for i,loss in enumerate(opt.losses):
     assert not opt.bs%opt.cs_per_bs[i], 'Batchsize has to be divisible by samples per class for {}.'.format(opt.losses[i])
 
 
+if opt.kernels == -1:
+    import multiprocessing
+    opt.kernels = multiprocessing.cpu_count()
 
 """============================================================================"""
 ################### GPU SETTINGS ###########################
-os.environ["CUDA_DEVICE_ORDER"]   ="PCI_BUS_ID"
-os.environ["CUDA_VISIBLE_DEVICES"]= str(opt.gpu)
+if opt.gpu > -1:
+    os.environ["CUDA_DEVICE_ORDER"]   ="PCI_BUS_ID"
+    os.environ["CUDA_VISIBLE_DEVICES"]= str(opt.gpu)
 
 
 
