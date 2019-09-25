@@ -1,0 +1,7 @@
+@conference{roth2019mic,
+  title={MIC: Mining Interclass Characteristics for Improved Metric Learning},
+  author={Roth, Karsten, and Brattoli, Biagio, and Ommer, Bj\"orn},
+  booktitle={Proceedings of the International Conference on Computer Vision (ICCV)},
+  year={2019}
+}
+
