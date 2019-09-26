@@ -3,10 +3,12 @@
 #### ___Authors___:
 * Karsten Roth (karsten.rh1@gmail.com)
 * Biagio Brattoli (biagio.brattoli@gmail.com)
-* Björn Ommer ()
+* Björn Ommer
+
+___Primary Contact___: Karsten Roth
 
 ---
-This repository contains the code to run the pipeline proposed in our ICCV 2019 paper _Mining Interclass Characteristics for Improved Deep Metric Learning_ (arxiv link). The results using this pipeline for ProxyNCA and Triplet with Semihard Sampling are better than noted in the paper due to an improved implementation of the baseline methods.
+This repository contains the code to run the pipeline proposed in our ICCV 2019 paper _Mining Interclass Characteristics for Improved Deep Metric Learning_ (https://arxiv.org/abs/1909.11574). The results using this pipeline for ProxyNCA and Triplet with Semihard Sampling are better than noted in the paper due to an improved implementation of the baseline methods.
 
 **Note:** Baseline implementations can be found at https://github.com/Confusezius/Deep-Metric-Learning-Baselines.
 
@@ -155,13 +157,12 @@ Name_of_Training_Run
 ---
 
 ## Citing Our Paper
-If you use this repository or which to cite our results, please use (**LINK TO ARXIV**)
+If you use this repository or wish to cite our results, please use (https://arxiv.org/abs/1909.11574)
 ```
-@inproceedings{mic2019,
-  title={MIC: Mining Interclass Characteristics for Improved Deep Metric Learning},
-  author={Roth, Karsten and Brattoli, Biagio and Ommer, Bj{\"o}rn},
-  booktitle={The IEEE International Conference on Computer Vision (ICCV)},
-  pages={1111-1111},
+@conference{roth2019mic,
+  title={MIC: Mining Interclass Characteristics for Improved Metric Learning},
+  author={Roth, Karsten, and Brattoli, Biagio, and Ommer, Bj\"orn},
+  booktitle={Proceedings of the International Conference on Computer Vision (ICCV)},
   year={2019}
 }
 ```
