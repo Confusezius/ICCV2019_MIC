@@ -16,8 +16,8 @@ This repository contains the code to run the pipeline proposed in our ICCV 2019 
 ### Requirements
 Our method was tested around
 * Python Version 3.6.6+
-* PyTorch Version 1.0.1+
-* Faiss(-gpu) 1.5.1 (GPU support optional)
+* PyTorch Version 1.0.1+ and Cuda 8.0
+* Faiss(-gpu) 1.5.1 (GPU support optional) for Cuda 8.0
 * Scikit Image 0.14.2
 * Scikit Learn 0.20.3
 * Scipy 1.2.1
