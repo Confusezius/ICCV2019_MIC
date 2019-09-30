@@ -36,7 +36,7 @@ For a quick start for standard Deep Metric Learning datasets:
 * [PKU Vehicle-ID](https://www.pkuml.org/resources/pku-vds.html)
 
 
-simply run the sample setups given in `Result_Runs.sh`. These give the values (*assuming the underlying setup to be the same*) reported in the paper.  
+simply run the sample setups given in `Result_Runs.sh`. These give similar values (*assuming the underlying setup to be the same*) as those reported in the paper. Minor differences are due to choice of seeds and underlying setups.  
 
 ---
 
