@@ -130,22 +130,16 @@ class Sampler():
         anchors = []
         for i in range(bs):
             l, d = labels[i], distances[i]
-            anchors.append(i)
-            #1 for batchelements with label l
             neg = labels!=l; pos = labels==l
-            #0 for current anchor
-            pos[i] = False
 
-            #Find negatives that violate triplet constraint semi-negatives
-            neg_mask = np.logical_and(neg,d<d[np.where(pos)[0]].max())
-            #Find positives that violate triplet constraint semi-hardly
-            pos_mask = np.logical_and(pos,d>d[np.where(neg)[0]].min())
+            anchors.append(i)
+            pos[i] = 0
+            p      = np.random.choice(np.where(pos)[0])
+            positives.append(p)
 
-            if pos_mask.sum()>0:
-                positives.append(np.random.choice(np.where(pos_mask)[0]))
-            else:
-                positives.append(np.random.choice(np.where(pos)[0]))
-
+            #Find negatives that violate tripet constraint semi-negatives
+            neg_mask = np.logical_and(neg,d>d[p])
+            neg_mask = np.logical_and(neg_mask,d<self.margin+d[p])
             if neg_mask.sum()>0:
                 negatives.append(np.random.choice(np.where(neg_mask)[0]))
             else:
