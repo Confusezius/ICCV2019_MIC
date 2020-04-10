@@ -110,7 +110,7 @@ class Sampler():
         sampled_triplets = random.sample(sampled_triplets, batch.shape[0])
         return sampled_triplets
 
-    def semihardsampling(self, batch, labels):
+    def semihardsampling(self, batch, labels, margin=0.2):
         """
         This methods finds all available triplets in a batch given by the classes provided in labels, and select
         triplets based on semihard sampling introduced in 'Deep Metric Learning via Lifted Structured Feature Embedding'.
