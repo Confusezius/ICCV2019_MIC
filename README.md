@@ -7,6 +7,8 @@
 
 ___Primary Contact___: Karsten Roth
 
+For baseline implementations, check out https://github.com/Confusezius/Revisiting_Deep_Metric_Learning_PyTorch and the accompanying paper!
+
 ---
 This repository contains the code to run the pipeline proposed in our ICCV 2019 paper _Mining Interclass Characteristics for Improved Deep Metric Learning_ (https://arxiv.org/abs/1909.11574). The results using this pipeline for ProxyNCA and Triplet with Semihard Sampling are better than noted in the paper due to an improved implementation of the baseline methods.
 
